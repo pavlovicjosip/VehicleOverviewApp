@@ -29,9 +29,9 @@ export class AuthService {
     );
     if (user) {
       this.authenticated = true;
-      return true; // Login successful
+      return true;
     } else {
-      return false; // Invalid credentials
+      return false;
     }
   }
 
