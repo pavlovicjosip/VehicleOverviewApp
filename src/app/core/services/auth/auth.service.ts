@@ -5,7 +5,6 @@ import { User } from '../../../shared/models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedInStatus = false;
 
   private users: User[] = [];
 
@@ -43,7 +42,4 @@ export class AuthService {
     this.authenticated = false;
   }
 
-  isLoggedIn(): boolean {
-    return this.isLoggedInStatus;
-  }
 }
