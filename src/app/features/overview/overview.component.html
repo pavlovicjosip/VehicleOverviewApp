@@ -1,0 +1,65 @@
+<div class="overview-container">
+  <div class="filter-container" [formGroup]="filterForm">
+    <input
+      type="text"
+      pInputText
+      placeholder="Search..."
+      formControlName="search"
+    />
+  </div>
+
+  <p-table
+    [value]="(filteredVehicles$ | async) ?? []"
+    [paginator]="true"
+    [rows]="10"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+          Name <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="manufacturer">
+          Manufacturer <p-sortIcon field="manufacturer"></p-sortIcon>
+        </th>
+        <th pSortableColumn="model">
+          Model <p-sortIcon field="model"></p-sortIcon>
+        </th>
+        <th pSortableColumn="year">
+          Year <p-sortIcon field="year"></p-sortIcon>
+        </th>
+        <th pSortableColumn="type">
+          Type <p-sortIcon field="type"></p-sortIcon>
+        </th>
+        <th pSortableColumn="type">
+          Licence Plate <p-sortIcon field="type"></p-sortIcon>
+        </th>
+        <th pSortableColumn="type">
+          Fuel Type <p-sortIcon field="type"></p-sortIcon>
+        </th>
+        <th>Active</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-vehicle>
+      <tr>
+        <td>{{ vehicle.name | trimName }}</td>
+        <td>{{ vehicle.manufacturer }}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.year }}</td>
+        <td>{{ vehicle.type }}</td>
+        <td>{{ vehicle.licensePlate }}</td>
+        <td>{{ vehicle.fuelType }}</td>
+        <td>
+          <i *ngIf="vehicle.active" class="pi pi-check-circle icon-true"></i>
+          <i *ngIf="!vehicle.active" class="pi pi-times-circle icon-false"></i>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">No vehicles found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

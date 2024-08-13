@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="card-wrapper">
+    <p-card header="{{ isLoginMode ? 'Login' : 'Sign Up' }}" class="auth-card">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="p-field">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            pInputText
+            formControlName="username"
+            class="input-field"
+          />
+        </div>
+
+        <div class="p-field">
+          <label for="password">Password</label>
+          <p-password
+            id="password"
+            formControlName="password"
+            feedback="false"
+            class="input-field"
+          ></p-password>
+          <div
+            *ngIf="loginForm.get('password')?.errors?.['isPasswordInvalid'] && loginForm.get('password')?.touched"
+            class="error-message"
+          >
+            Password must be at least 8 characters long, contain an uppercase
+            letter, a number, and a special character.
+          </div>
+        </div>
+
+        <button
+          pButton
+          type="submit"
+          label="{{ isLoginMode ? 'Login' : 'Sign Up' }}"
+          class="auth-button"
+          [disabled]="loginForm.invalid"
+        ></button>
+
+        <div *ngIf="errorMessage" class="error-message p-mt-2">
+          {{ errorMessage }}
+        </div>
+        <button
+          pButton
+          severity="warning"
+          label="Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}"
+          class="toggle-button"
+          (click)="toggleMode()"
+        ></button>
+      </form>
+    </p-card>
+  </div>
+</div>
